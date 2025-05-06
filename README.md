@@ -37,3 +37,17 @@ Run It Yourself:
    Visit http://localhost:8000/docs
    Upload an image → get the predicted label
    ```
+
+Running on GPU (Optional) 
+   ```
+   To enable GPU acceleration with NVIDIA GPUs, you'll need:
+   * NVIDIA GPU drivers
+   * NVIDIA Container Toolkit
+   * Docker with GPU support
+
+   One set up, use this command to run the container using your GPU:
+
+   docker run --gpus all -p 8000:8000 gpu-inference-app
+   ```
+
+   
