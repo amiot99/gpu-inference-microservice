@@ -19,10 +19,10 @@ Tech Stack
 Run It Yourself:
 
 1. Clone the repo
-  ```bash
-  git clone https://github.com/your-username/gpu-inference-microservice.git
-  cd gpu-inference-microservice
-  ```
+   ```bash
+   git clone https://github.com/your-username/gpu-inference-microservice.git
+   cd gpu-inference-microservice
+   ```
 
 2. Build the Docker image
    ```
