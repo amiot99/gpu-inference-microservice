@@ -4,3 +4,4 @@ __pycache__/
 *.jpg
 *.png
 *.jpeg
+.idea/
