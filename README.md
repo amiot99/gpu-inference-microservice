@@ -24,7 +24,7 @@ Run It Yourself:
   cd gpu-inference-microservice
   ```
 
-2. Build the Docker image
+2. **Build the Docker image**
    docker build -t gpu-inference-app .
 
 4. Run the container
