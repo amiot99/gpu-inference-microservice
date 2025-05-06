@@ -45,7 +45,7 @@ Running on GPU (Optional)
    * NVIDIA Container Toolkit
    * Docker with GPU support
 
-   One set up, use this command to run the container using your GPU:
+   Once set up, use this command to run the container using your GPU:
 
    docker run --gpus all -p 8000:8000 gpu-inference-app
    ```
