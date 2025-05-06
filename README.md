@@ -18,18 +18,22 @@ Tech Stack
 
 Run It Yourself:
 
-1 **Clone the repo**  
+1. Clone the repo
   ```bash
   git clone https://github.com/your-username/gpu-inference-microservice.git
   cd gpu-inference-microservice
   ```
 
-2. **Build the Docker image**
+2. Build the Docker image
+   ```
    docker build -t gpu-inference-app .
-
-4. Run the container
+   ```
+3. Run the container
+   ```
    docker run -p 8000:8000 gpu-inference-app
-
-5. Use the API
+   ```
+4. Use the API
+   ```
    Visit http://localhost:8000/docs
    Upload an image → get the predicted label
+   ```
