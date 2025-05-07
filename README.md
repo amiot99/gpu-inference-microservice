@@ -3,16 +3,20 @@ GPU Inference Microservice with FastAPI + PyTorch
 This project is a minimal, production-style microservice for GPU-accelerated image classification. 
 It uses a pre-trained ResNet18 model from PyTorch, wrapped in a FastAPI server, and containerized with Docker.
 
+Additionally, it includes Kubernetes deployment configurations for easy scaling and orchestration.
+
 What It Does
 
 - Accepts image uploads via a `/predict` endpoint
 - Runs inference using a GPU-enabled ResNet18 model
 - Returns the predicted class label (e.g., “golden retriever”)
+- Deployable via Docker and Kubernetes
 
 Tech Stack 
 - PyTorch (ResNet18, pretrained on ImageNet)
 - FastAPI for the web server
 - Docker for containerization
+- Kubernetes for orchestration and scaling
 - Uvicorn for serving the API
 
 
