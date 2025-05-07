@@ -57,9 +57,5 @@ async def predict(model: str = Form(...),image: UploadFile = File(...)):
         "model_used" : model
     }
 
-#Now that I have an image loaded in and set to contents I need to convert it into a usable
-#format that the model can understand
-
-
 
 
