@@ -49,5 +49,32 @@ Running on GPU (Optional)
 
    docker run --gpus all -p 8000:8000 gpu-inference-app
    ```
+Deploying with Kubernetes (Optional) 
+If you want to deploy the application using Kubernetes: 
 
+1. Ensure Minikube is installed:
+   [Install Minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)
+2. Start Minikube:
+   ```
+   minikube start --driver=docker
+   ```
+3. Build the docker image inside Minikube:
+   ```
+   eval $(minikube docker-env)
+   docker build -t gpu-inference-app:latest .
+   ```
+4. Apply the Kubernetes Manifests:
+   ```
+   kubectl apply -f k8s/
+   ```
+5. Verify the Deployments:
+   ```
+   kubectl get pods
+   kubectl get svc
+   ```
+6. Access the Application:
+   ```
+   minikube service gpu-inference-service
+   ```
+   
    
