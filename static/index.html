@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GPU Image Classifier</title>
+</head>
+<body>
+    <h1>Upload Image for Classification</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="model">Choose model:</label>
+        <select name="model" id="model">
+            <option value="resnet18">ResNet18</option>
+            <option value="resnet50">ResNet50</option>
+        </select>
+        <br><br>
+        <input type="file" name="image" accept="image/*" required>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>

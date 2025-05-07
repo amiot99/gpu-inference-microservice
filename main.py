@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from fastapi import UploadFile, File
+from fastapi import UploadFile, File, Form
+from fastapi import HTTPException
+from fastapi.responses import HTMLResponse
 import torch
 import numpy as np
 import torchvision.models as models
@@ -12,19 +14,24 @@ with open("imagenet_classes.txt", "r") as f:
     labels = [line.strip() for line in f.readlines()]
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-my_model = models.resnet18(pretrained=True)
-my_model = my_model.to(device)
-my_model.eval()
 
+model_cache = {
+    "resnet18": models.resnet18(weights=models.ResNet18_Weights.DEFAULT).to(device).eval(),
+    "resnet50": models.resnet50(weights=models.ResNet50_Weights.DEFAULT).to(device).eval()
+}
 app = FastAPI()
 
-@app.get("/") #this tells FastAPI that the function right below is in charge of handling requests that go to:
+@app.get("/",response_class=HTMLResponse) #this tells FastAPI that the function right below is in charge of handling requests that go to:
 #the path /, using a get operation
 async def root():
-    return {"message": "Hello World"}
+    with open("static/index.html", "r") as f:
+        html_content = f.read()
+    return html_content
 
 @app.post("/predict")
-async def predict(image: UploadFile = File(...)):
+async def predict(model: str = Form(...),image: UploadFile = File(...)):
+    if model not in model_cache:
+        raise HTTPException(status_code=400, detail="Unsupported model")
     contents = await image.read()
     convert_contents = Image.open(io.BytesIO(contents)).convert("RGB")
     preprocess = transforms.Compose([
@@ -36,15 +43,18 @@ async def predict(image: UploadFile = File(...)):
     image_tensor = preprocess(convert_contents)
     image_tensor = image_tensor.unsqueeze_(0)
     image_tensor = image_tensor.to(device)
+
+    selected_model = model_cache[model]
     with torch.no_grad():
-        outputs = my_model(image_tensor)
+        outputs = selected_model(image_tensor)
 
     predicted_idx = outputs.argmax(dim=1).item()
     label = labels[predicted_idx]
     return {
         "filename": image.filename,
         "predicted_index": predicted_idx,
-        "predicted_label": label
+        "predicted_label": label,
+        "model_used" : model
     }
 
 #Now that I have an image loaded in and set to contents I need to convert it into a usable

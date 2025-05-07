@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment #controller that starts pods for you, keeps them running, can restart if they crash, handles updates
+metadata: #describe the object itself
+  name: gpu-inference
+
+spec: #here's how I want this deployment to behave
+  replicas: 1 #number of pods to spin up within container
+  selector: #used to find and manage its pods
+    matchLabels:
+      app: gpu-inference #only manage pods whose label is this
+  template: #template for the pod the deployment should create
+    metadata:
+      labels:
+        app: gpu-inference
+    spec: #specification for the pod. Instructions for what to run
+      containers:
+        - name: gpu-inference-container #name whatever you want it to be
+          image: gpu-inference-app:latest #The image that was built in docker
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8000 # what port your app listens on inside the container
+         # resources:
+         #   limits: #This container needs 1 GPU to run
+         #     nvidia.com/gpu: 1 #key that tells kubernetes to schedule this pod on a node with NVIDIA GPU
+
+
+
