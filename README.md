@@ -1,6 +1,6 @@
 GPU Inference Microservice with FastAPI + PyTorch
 
-This project is a minimal, production-style microservice for GPU-accelerated image classification. 
+This project is a minimal, production-style microservice for GPU-accelerated AI/ML image classification. 
 It uses pre-trained models (ResNet18 and ResNet50) from PyTorch, wrapped in a FastAPI server, and containerized with Docker.
 Additionally, it includes Kubernetes deployment configurations for easy scaling and orchestration.
 
