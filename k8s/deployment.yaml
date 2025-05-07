@@ -19,9 +19,10 @@ spec: #here's how I want this deployment to behave
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 8000 # what port your app listens on inside the container
-         # resources:
-         #   limits: #This container needs 1 GPU to run
-         #     nvidia.com/gpu: 1 #key that tells kubernetes to schedule this pod on a node with NVIDIA GPU
+          #Uncomment the following section to enable GPU support. Ensure your node has an NVIDIA GPU and the NVIDIA device plugin is installed.
+          #resources:
+            #limits: #This container needs 1 GPU to run
+              #nvidia.com/gpu: 1 #key that tells kubernetes to schedule this pod on a node with NVIDIA GPU
 
 
 
