@@ -80,4 +80,34 @@ If you want to deploy the application using Kubernetes:
    minikube service gpu-inference-service
    ```
    
-   
+Troubleshooting:
+
+Issue: WSL2 disk space not reclaimed after deleting docker containers/images
+
+If you notice that the disk space in WSL2 is not being reclaimed after deleting Docker containers and images, follow 
+these steps to manually compact the disk:
+
+1. Shut down Docker and WSL2: 
+   ```
+   wsl -shutdown
+   ```
+2. Locate the VHDX File:
+   Navigate to the WSL2 virtual disk file. The default path is:
+   ```
+   C:\Users\{username}\AppData\Local\Docker\wsl\disk\docker_data.vhdx
+   ```
+3. Compact the Disk:
+   Open PowerShell as Administrator and run:
+   ```
+   diskpart
+   ```
+   In the diskpart prompt, enter the following commands:
+   ```
+   select vdisk file="C:\Users\{username}\AppData\Local\Docker\wsl\disk\docker_data.vhdx"
+   attach vdisk readonly
+   compact vdisk
+   detach vdisk
+   exit
+   ```
+4. Restart Docker Desktop
+
